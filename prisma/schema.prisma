@@ -1,0 +1,60 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+  // binaryTargets = ["native", "rhel-openssl-3.0.x"]
+  previewFeatures = ["interactiveTransactions"]
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+generator nestgraphql {
+  provider                          = "node node_modules/prisma-nestjs-graphql"
+  output                            = "../src/@generated"
+  // purgeOutput                       = "true"
+
+  noTypeId                          = "true" // 기본적으로 id값을 만드는 건가?
+  // fields_Validator_input            = "true"
+  // fields_Validator_from             = "class-validator"
+  // https://velog.io/@doohyunlm/TypeScript-class-validator-%EC%82%AC%EC%9A%A9%EB%B2%95
+
+  // graphql에서 지원하지 않는 타입이기 때문에 따로 추가해야한다
+  // Int: 32-bit 부호 있는 정수를 나타냅니다.
+  // Float: 부동 소수점 숫자를 나타냅니다.
+  // String: 텍스트 데이터를 나타냅니다.
+  // Boolean: 참 또는 거짓을 나타냅니다.
+  // ID: 고유 식별자를 나타냅니다. 주로 문자열로 표현되지만 내부적으로는 어떠한 스칼라 유형이든 될 수 있습니다.
+  graphqlScalars_DateTime_specifier = "graphql-scalars"
+  graphqlScalars_DateTime_name      = "GraphQLDateTime"
+  graphqlScalars_BigInt_specifier   = "graphql-scalars"
+  graphqlScalars_BigInt_name        = "GraphQLBigInt"
+
+}
+
+model Item {
+  item_id     BigInt    @id @default(autoincrement())
+  img_url     String
+  item_title  String
+  keywords    String
+  bid         Int        @default(50)
+  use_yn      show_yn    @default(Y)
+  ins_date    DateTime   @default(now()) @db.DateTime(0)
+  upd_date    DateTime   @updatedAt @default(now()) @db.DateTime(0) // 0은 정밀도래
+  del_yn      del_yn     @default(N)
+
+  @@map("item")
+}
+
+enum show_yn {
+  Y
+  N
+}
+
+enum del_yn {
+  Y
+  N
+}

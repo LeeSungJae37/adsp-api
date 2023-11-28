@@ -1,0 +1,210 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Item {
+  item_id: BigInt!
+  img_url: String!
+  item_title: String!
+  keywords: String!
+  bid: Int!
+  use_yn: show_yn!
+  ins_date: DateTime!
+  upd_date: DateTime!
+  del_yn: del_yn!
+}
+
+"""
+The `BigInt` scalar type represents non-fractional signed whole numeric values.
+"""
+scalar BigInt
+
+enum show_yn {
+  Y
+  N
+}
+
+"""
+A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar.
+"""
+scalar DateTime
+
+enum del_yn {
+  Y
+  N
+}
+
+type Query {
+  """광고 아이템 리스트"""
+  item_list: [Item!]!
+}
+
+type Mutation {
+  addItem(Item: ItemCreateManyInput!): Item!
+  changeUseYn(Item: ItemCreateManyInput!): Item!
+  deleteItem(Item: ItemWhereUniqueInput!): Item!
+}
+
+input ItemCreateManyInput {
+  item_id: BigInt
+  img_url: String!
+  item_title: String!
+  keywords: String!
+  bid: Int
+  use_yn: show_yn
+  ins_date: DateTime
+  upd_date: DateTime
+  del_yn: del_yn
+}
+
+input ItemWhereUniqueInput {
+  item_id: BigInt
+  AND: [ItemWhereInput!]
+  OR: [ItemWhereInput!]
+  NOT: [ItemWhereInput!]
+  img_url: StringFilter
+  item_title: StringFilter
+  keywords: StringFilter
+  bid: IntFilter
+  use_yn: Enumshow_ynFilter
+  ins_date: DateTimeFilter
+  upd_date: DateTimeFilter
+  del_yn: Enumdel_ynFilter
+}
+
+input ItemWhereInput {
+  AND: [ItemWhereInput!]
+  OR: [ItemWhereInput!]
+  NOT: [ItemWhereInput!]
+  item_id: BigIntFilter
+  img_url: StringFilter
+  item_title: StringFilter
+  keywords: StringFilter
+  bid: IntFilter
+  use_yn: Enumshow_ynFilter
+  ins_date: DateTimeFilter
+  upd_date: DateTimeFilter
+  del_yn: Enumdel_ynFilter
+}
+
+input BigIntFilter {
+  equals: BigInt
+  in: [BigInt!]
+  notIn: [BigInt!]
+  lt: BigInt
+  lte: BigInt
+  gt: BigInt
+  gte: BigInt
+  not: NestedBigIntFilter
+}
+
+input NestedBigIntFilter {
+  equals: BigInt
+  in: [BigInt!]
+  notIn: [BigInt!]
+  lt: BigInt
+  lte: BigInt
+  gt: BigInt
+  gte: BigInt
+  not: NestedBigIntFilter
+}
+
+input StringFilter {
+  equals: String
+  in: [String!]
+  notIn: [String!]
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  contains: String
+  startsWith: String
+  endsWith: String
+  not: NestedStringFilter
+}
+
+input NestedStringFilter {
+  equals: String
+  in: [String!]
+  notIn: [String!]
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  contains: String
+  startsWith: String
+  endsWith: String
+  not: NestedStringFilter
+}
+
+input IntFilter {
+  equals: Int
+  in: [Int!]
+  notIn: [Int!]
+  lt: Int
+  lte: Int
+  gt: Int
+  gte: Int
+  not: NestedIntFilter
+}
+
+input NestedIntFilter {
+  equals: Int
+  in: [Int!]
+  notIn: [Int!]
+  lt: Int
+  lte: Int
+  gt: Int
+  gte: Int
+  not: NestedIntFilter
+}
+
+input Enumshow_ynFilter {
+  equals: show_yn
+  in: [show_yn!]
+  notIn: [show_yn!]
+  not: NestedEnumshow_ynFilter
+}
+
+input NestedEnumshow_ynFilter {
+  equals: show_yn
+  in: [show_yn!]
+  notIn: [show_yn!]
+  not: NestedEnumshow_ynFilter
+}
+
+input DateTimeFilter {
+  equals: DateTime
+  in: [DateTime!]
+  notIn: [DateTime!]
+  lt: DateTime
+  lte: DateTime
+  gt: DateTime
+  gte: DateTime
+  not: NestedDateTimeFilter
+}
+
+input NestedDateTimeFilter {
+  equals: DateTime
+  in: [DateTime!]
+  notIn: [DateTime!]
+  lt: DateTime
+  lte: DateTime
+  gt: DateTime
+  gte: DateTime
+  not: NestedDateTimeFilter
+}
+
+input Enumdel_ynFilter {
+  equals: del_yn
+  in: [del_yn!]
+  notIn: [del_yn!]
+  not: NestedEnumdel_ynFilter
+}
+
+input NestedEnumdel_ynFilter {
+  equals: del_yn
+  in: [del_yn!]
+  notIn: [del_yn!]
+  not: NestedEnumdel_ynFilter
+}
