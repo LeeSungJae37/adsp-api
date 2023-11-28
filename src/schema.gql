@@ -37,39 +37,9 @@ enum del_yn {
 type Query {
   """광고 아이템 리스트"""
   item_list: [Item!]!
-}
 
-type Mutation {
-  addItem(Item: ItemCreateManyInput!): Item!
-  changeUseYn(Item: ItemCreateManyInput!): Item!
-  deleteItem(Item: ItemWhereUniqueInput!): Item!
-}
-
-input ItemCreateManyInput {
-  item_id: BigInt
-  img_url: String!
-  item_title: String!
-  keywords: String!
-  bid: Int
-  use_yn: show_yn
-  ins_date: DateTime
-  upd_date: DateTime
-  del_yn: del_yn
-}
-
-input ItemWhereUniqueInput {
-  item_id: BigInt
-  AND: [ItemWhereInput!]
-  OR: [ItemWhereInput!]
-  NOT: [ItemWhereInput!]
-  img_url: StringFilter
-  item_title: StringFilter
-  keywords: StringFilter
-  bid: IntFilter
-  use_yn: Enumshow_ynFilter
-  ins_date: DateTimeFilter
-  upd_date: DateTimeFilter
-  del_yn: Enumdel_ynFilter
+  """광고 검색"""
+  search(where: ItemWhereInput, orderBy: [ItemOrderByWithRelationInput!], cursor: ItemWhereUniqueInput, take: Int, skip: Int, distinct: [ItemScalarFieldEnum!]): [Item!]!
 }
 
 input ItemWhereInput {
@@ -207,4 +177,66 @@ input NestedEnumdel_ynFilter {
   in: [del_yn!]
   notIn: [del_yn!]
   not: NestedEnumdel_ynFilter
+}
+
+input ItemOrderByWithRelationInput {
+  item_id: SortOrder
+  img_url: SortOrder
+  item_title: SortOrder
+  keywords: SortOrder
+  bid: SortOrder
+  use_yn: SortOrder
+  ins_date: SortOrder
+  upd_date: SortOrder
+  del_yn: SortOrder
+}
+
+enum SortOrder {
+  asc
+  desc
+}
+
+input ItemWhereUniqueInput {
+  item_id: BigInt
+  AND: [ItemWhereInput!]
+  OR: [ItemWhereInput!]
+  NOT: [ItemWhereInput!]
+  img_url: StringFilter
+  item_title: StringFilter
+  keywords: StringFilter
+  bid: IntFilter
+  use_yn: Enumshow_ynFilter
+  ins_date: DateTimeFilter
+  upd_date: DateTimeFilter
+  del_yn: Enumdel_ynFilter
+}
+
+enum ItemScalarFieldEnum {
+  item_id
+  img_url
+  item_title
+  keywords
+  bid
+  use_yn
+  ins_date
+  upd_date
+  del_yn
+}
+
+type Mutation {
+  addItem(Item: ItemCreateManyInput!): Item!
+  changeUseYn(Item: ItemCreateManyInput!): Item!
+  deleteItem(Item: ItemWhereUniqueInput!): Item!
+}
+
+input ItemCreateManyInput {
+  item_id: BigInt
+  img_url: String!
+  item_title: String!
+  keywords: String!
+  bid: Int
+  use_yn: show_yn
+  ins_date: DateTime
+  upd_date: DateTime
+  del_yn: del_yn
 }

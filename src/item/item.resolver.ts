@@ -9,6 +9,7 @@ import { ItemWhereUniqueInput } from '../@generated/item/item-where-unique.input
 import { ItemCreateInput } from '../@generated/item/item-create.input';
 import { UpsertOneItemArgs } from '../@generated/item/upsert-one-item.args';
 import { DeleteOneItemArgs } from '../@generated/item/delete-one-item.args';
+import { FindManyItemArgs } from '../@generated/item/find-many-item.args';
 
 @Resolver(() => Item)
 export class ItemResolver {
@@ -37,5 +38,13 @@ export class ItemResolver {
   @Mutation(() => Item)
   deleteItem(@Args('Item') item: ItemWhereUniqueInput) {
     return this.itemService.deleteItem(item);
+  }
+
+  @Query(() => [Item], {
+    name: 'search',
+    description: '광고 검색',
+  })
+  searchItems(@Args() item: FindManyItemArgs) {
+    return this.itemService.searchItems(item);
   }
 }

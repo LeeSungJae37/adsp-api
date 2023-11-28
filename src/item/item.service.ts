@@ -9,6 +9,7 @@ import { ItemWhereUniqueInput } from '../@generated/item/item-where-unique.input
 import { ItemCreateInput } from '../@generated/item/item-create.input';
 import { UpsertOneItemArgs } from '../@generated/item/upsert-one-item.args';
 import { DeleteOneItemArgs } from '../@generated/item/delete-one-item.args';
+import { FindManyItemArgs } from '../@generated/item/find-many-item.args';
 
 @Injectable()
 export class ItemService {
@@ -41,6 +42,12 @@ export class ItemService {
   async deleteItem(item: ItemWhereUniqueInput) {
     return await this.prisma.item.delete({
       where: { item_id: item.item_id },
+    });
+  }
+
+  async searchItems(item: FindManyItemArgs) {
+    return await this.prisma.item.findMany({
+      where: { keywords: item.where.keywords.contains },
     });
   }
 }
